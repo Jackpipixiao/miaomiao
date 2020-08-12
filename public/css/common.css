@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: microsoft YaHei;
+}
+ul{
+    list-style: none;
+}
+.l{
+    float: left;
+}
+.r {
+    float: right;
+}
+a{
+    text-decoration: none;
+}
