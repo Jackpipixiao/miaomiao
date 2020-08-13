@@ -7,6 +7,6 @@
 <script>
 // import tabbar from "./components/TabBar";
 export default {
-  components: {  },
+  components: { },
 };
 </script>

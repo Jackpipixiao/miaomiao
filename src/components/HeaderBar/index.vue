@@ -1,6 +1,6 @@
 ﻿<template>
     <header id="header">
-        <h1>{{title}}</h1>
+        <h2>{{title}}</h2>
     </header>
 </template>
 <script>
@@ -17,11 +17,12 @@ export default {
 <style lang="scss" scoped>
 #header{
     height: 40px;
+    line-height: 40px;
     width: 100%;
     background-color: red;
     color: #fff
 }
-#header h1{
+#header h2{
     text-align: center;
 }
 </style>

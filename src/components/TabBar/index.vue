@@ -31,6 +31,7 @@ footer{
 }
 ul{
   display: flex;
+  background-color: #fff;
   li{
     flex: 1;
     text-align: center;

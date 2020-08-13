@@ -1,7 +1,7 @@
 <template>
   <div>
     <headerBar title="喵喵电影"></headerBar>
-    <div class="content">
+    <div id="content">
       <div class="movie_menu">
         <router-link tag="div" to="/movie/city" class="city_name" active-class="active">
           <span>大连</span>
@@ -13,6 +13,7 @@
           <i class="iconfont icon-search"></i>
         </router-link>
       </div>
+      <router-view></router-view>
     </div>
     <tabbar></tabbar>
   </div>
@@ -29,25 +30,23 @@ export default {
 };
 </script>
 <style scoped>
-.content .movie_menu {
+#content .movie_menu {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   line-height: 40px;
 }
-.content .movie_menu .city_name {
-  margin-left: 20px;
+#content .movie_menu .city_name {
   text-align: center;
 }
-.content .movie_menu .active {
+#content .movie_menu .active {
     color: red;
   border-bottom: 2px solid red;
 }
-.content .movie_menu .search_entry {
+#content .movie_menu .search_entry {
   line-height: 40px;
-  margin-right: 20px;
   align-items: center;
 }
-.content .movie_menu .search_entry i {
+#content .movie_menu .search_entry i {
   font-size: 24px;
   line-height: 40px;
 }
