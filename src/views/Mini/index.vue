@@ -1,6 +1,6 @@
-<template>
+﻿<template>
   <div>
-      <headerBar title="我的喵喵"></headerBar>
+      <headerBar title="我的电影"></headerBar>
     <tabbar></tabbar>
   </div>
 </template>
