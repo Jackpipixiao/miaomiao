@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name:'headerBar',
+    name:'HeaderBar',
     props: {
         title:{
             type:String,

@@ -13,7 +13,9 @@
           <i class="iconfont icon-search"></i>
         </router-link>
       </div>
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
     <tabbar></tabbar>
   </div>
@@ -21,6 +23,7 @@
 <script>
 import headerBar from "@/components/HeaderBar";
 import tabbar from "../../components/TabBar";
+
 export default {
   name: "Movie",
   components: {
@@ -39,7 +42,7 @@ export default {
   text-align: center;
 }
 #content .movie_menu .active {
-    color: red;
+  color: red;
   border-bottom: 2px solid red;
 }
 #content .movie_menu .search_entry {

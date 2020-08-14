@@ -16,7 +16,9 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "Login",
+};
 </script>
 <style scoped>
 .login_body .login_text {

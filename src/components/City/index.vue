@@ -6,82 +6,45 @@
         <ul>
           <li>上海</li>
           <li>北京</li>
-          <li>上海</li>
-          <li>北京</li>
-          <li>上海</li>
-          <li>北京</li>
-          <li>上海</li>
-          <li>北京</li>
+          <li>广州</li>
+          <li>杭州</li>
+          <li>深圳</li>
+          <li>南京</li>
         </ul>
       </div>
       <div class="city_sort">
-        <div>
-          <h2>A</h2>
+        <div v-for="item in city_list" :key="item">
+          <h2>{{item.title}}</h2>
           <ul>
-            <li>阿拉善盟</li>
-            <li>鞍山</li>
-            <li>安庆</li>
-            <li>安阳</li>
+            <li v-for="ltem in city_list" :key="ltem">{{ltem.lists}}</li>
           </ul>
         </div>
-        <div>
-          <h2>B</h2>
-          <ul>
-            <li>北京</li>
-            <li>保定</li>
-            <li>蚌埠</li>
-            <li>包头</li>
-          </ul>
-        </div>
-        <div>
-          <h2>A</h2>
-          <ul>
-            <li>阿拉善盟</li>
-            <li>鞍山</li>
-            <li>安庆</li>
-            <li>安阳</li>
-          </ul>
-        </div>
-        <div>
-          <h2>B</h2>
-          <ul>
-            <li>北京</li>
-            <li>保定</li>
-            <li>蚌埠</li>
-            <li>包头</li>
-          </ul>
-        </div>
-        <div>
-          <h2>A</h2>
-          <ul>
-            <li>阿拉善盟</li>
-            <li>鞍山</li>
-            <li>安庆</li>
-            <li>安阳</li>
-          </ul>
-        </div>
-        <div>
-          <h2>B</h2>
-          <ul>
-            <li>北京</li>
-            <li>保定</li>
-            <li>蚌埠</li>
-            <li>包头</li>
-          </ul>
-        </div>
+        <div></div>
       </div>
-    </div>
-    <div class="city_index">
-      <ul>
-        <li>A</li>
-        <li>B</li>
-        <li>C</li>
-        <li>D</li>
-        <li>E</li>
-      </ul>
+      <div class="city_index">
+        <ul>
+          <li>A</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
+<script>
+import axios from "axios";
+export default {
+  name: "City",
+  data() {
+    return {
+      city_list: [],
+    };
+  },
+  mounted() {
+    axios.get("../../../public/json/city.json").then((res) => {
+      this.city_list = res.city;
+    });
+  },
+};
+</script>
 <style scoped>
 .city_body {
   margin-top: 45px;
@@ -152,11 +115,11 @@
   text-align: center;
   border-left: 1px #e6e6e6 solid;
 }
-.clearfix::after{
-    content: "";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
+.clearfix::after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }
 </style>

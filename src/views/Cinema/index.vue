@@ -26,7 +26,7 @@ import tabbar from "@/components/TabBar";
 import headerBar from "@/components/HeaderBar";
 import cilist from "@/components/CiList";
 export default {
-  name: "Mini",
+  name: "Cinema",
   components: {
     tabbar,
     headerBar,

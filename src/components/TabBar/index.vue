@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-  name: 'tabBar'
+  name: 'TabBar'
 }
 </script>
 <style lang="scss" scoped>

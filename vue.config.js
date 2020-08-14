@@ -8,7 +8,7 @@ module.exports={
           target: 'https://www.qunar.com', // 需要跨域的网址官网，这里需要带http
           //ws:true,可以不用的
           changeOrigin: true
-        }
+        },
         //'/foo':{
         //target:'<other_url>'可以不用的
         //}

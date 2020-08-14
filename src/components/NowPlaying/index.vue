@@ -1,130 +1,52 @@
 <template>
   <div class="movie_body">
+    <myswiper :key="data_list.length">
+      <div class="swiper-slide" v-for="list in data_list" :key="list.id">
+        <img :src="list.img" />
+      </div>
+    </myswiper>
     <ul>
-      <li>
+      <li v-for="dada in data_list" :key="dada.id"> 
         <div class="pic_show">
-          <img src="images/movie_1.jpg" />
+          <img :src="dada.listImg" />
         </div>
         <div class="info_list">
-          <h2>无名之辈</h2>
+          <h2>{{dada.shortName}}</h2>
           <p>
             观众评
-            <span class="grade">9.2</span>
+            <span class="grade">{{dada.sort}}</span>
           </p>
-          <p>主演: 陈建斌,任素汐,潘斌龙</p>
-          <p>今天55家影院放映607场</p>
+          <p>{{dada.listTitle}}</p>
+          <p>{{dada.desc}}</p>
         </div>
-        <div class="btn_mall">购票</div>
-      </li>
-      <li>
-        <div class="pic_show">
-          <img src="images/movie_2.jpg" />
-        </div>
-        <div class="info_list">
-          <h2>毒液：致命守护者</h2>
-          <p>
-            观众评
-            <span class="grade">9.3</span>
-          </p>
-          <p>主演: 汤姆·哈迪,米歇尔·威廉姆斯,里兹·阿迈德</p>
-          <p>今天56家影院放映443场</p>
-        </div>
-        <div class="btn_mall">购票</div>
-      </li>
-      <li>
-        <div class="pic_show">
-          <img src="images/movie_1.jpg" />
-        </div>
-        <div class="info_list">
-          <h2>无名之辈</h2>
-          <p>
-            观众评
-            <span class="grade">9.2</span>
-          </p>
-          <p>主演: 陈建斌,任素汐,潘斌龙</p>
-          <p>今天55家影院放映607场</p>
-        </div>
-        <div class="btn_mall">购票</div>
-      </li>
-      <li>
-        <div class="pic_show">
-          <img src="images/movie_2.jpg" />
-        </div>
-        <div class="info_list">
-          <h2>毒液：致命守护者</h2>
-          <p>
-            观众评
-            <span class="grade">9.3</span>
-          </p>
-          <p>主演: 汤姆·哈迪,米歇尔·威廉姆斯,里兹·阿迈德</p>
-          <p>今天56家影院放映443场</p>
-        </div>
-        <div class="btn_mall">购票</div>
-      </li>
-      <li>
-        <div class="pic_show">
-          <img src="images/movie_1.jpg" />
-        </div>
-        <div class="info_list">
-          <h2>无名之辈</h2>
-          <p>
-            观众评
-            <span class="grade">9.2</span>
-          </p>
-          <p>主演: 陈建斌,任素汐,潘斌龙</p>
-          <p>今天55家影院放映607场</p>
-        </div>
-        <div class="btn_mall">购票</div>
-      </li>
-      <li>
-        <div class="pic_show">
-          <img src="images/movie_2.jpg" />
-        </div>
-        <div class="info_list">
-          <h2>毒液：致命守护者</h2>
-          <p>
-            观众评
-            <span class="grade">9.3</span>
-          </p>
-          <p>主演: 汤姆·哈迪,米歇尔·威廉姆斯,里兹·阿迈德</p>
-          <p>今天56家影院放映443场</p>
-        </div>
-        <div class="btn_mall">购票</div>
-      </li>
-      <li>
-        <div class="pic_show">
-          <img src="images/movie_1.jpg" />
-        </div>
-        <div class="info_list">
-          <h2>无名之辈</h2>
-          <p>
-            观众评
-            <span class="grade">9.2</span>
-          </p>
-          <p>主演: 陈建斌,任素汐,潘斌龙</p>
-          <p>今天55家影院放映607场</p>
-        </div>
-        <div class="btn_mall">购票</div>
-      </li>
-      <li>
-        <div class="pic_show">
-          <img src="images/movie_2.jpg" />
-        </div>
-        <div class="info_list">
-          <h2>毒液：致命守护者</h2>
-          <p>
-            观众评
-            <span class="grade">9.3</span>
-          </p>
-          <p>主演: 汤姆·哈迪,米歇尔·威廉姆斯,里兹·阿迈德</p>
-          <p>今天56家影院放映443场</p>
-        </div>
-        <div class="btn_mall">购票</div>
+        <div class="btn_mall">预定</div>
       </li>
     </ul>
   </div>
 </template>
+<script>
+import myswiper from "@/components/Swiper";
+import axios from "axios";
+export default {
+  name: "NowPlaying",
+  data() {
+    return {
+      data_list: [],
+    };
+  },
+  components: { myswiper },
+  mounted() {
+    axios.get("/hotel/mustTry?city=nanjing").then((res) => {
+      this.data_list = res.data.data;
+    });
+  },
+};
+</script>
 <style scoped>
+.swiper-slide img {
+  width: 100%;
+  height: 250px;
+}
 .movie_menu {
   width: 100%;
   height: 45px;
@@ -196,6 +118,7 @@
 }
 .movie_body .pic_show img {
   width: 100%;
+  height: 80px;
 }
 .movie_body .info_list {
   margin-left: 10px;

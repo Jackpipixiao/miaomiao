@@ -3,49 +3,52 @@
     <div class="search_input">
       <div class="search_input_wrapper">
         <i class="iconfont icon-sousuo"></i>
-        <input type="text" />
+        <input type="text" v-model="message" />
       </div>
     </div>
     <div class="search_result">
       <h3>电影/电视剧/综艺</h3>
       <ul>
-        <li>
+        <li v-for="stem in hotelList" :key="stem">
           <div class="img">
-            <img src="images/movie_1.jpg" />
+            <img :src="stem.img" />
           </div>
           <div class="info">
             <p>
-              <span>无名之辈</span>
-              <span>8.5</span>
+              <span>{{stem.shortName}}</span>
+              <span>{{stem.sort}}</span>
             </p>
-            <p>A Cool Fish</p>
-            <p>剧情,喜剧,犯罪</p>
-            <p>2018-11-16</p>
-          </div>
-        </li>
-        <li>
-          <div class="img">
-            <img src="images/movie_1.jpg" />
-          </div>
-          <div class="info">
-            <p>
-              <span>无名之辈</span>
-              <span>8.5</span>
-            </p>
-            <p>A Cool Fish</p>
-            <p>剧情,喜剧,犯罪</p>
-            <p>2018-11-16</p>
+            <p>{{stem.listTitle}}</p>
+            <p>{{stem.desc}}</p>
+            <p>{{stem.grassCount}}</p>
           </div>
         </li>
       </ul>
     </div>
   </div>
 </template>
+<script>
+import axios from "axios";
+export default {
+  name: "Search",
+  data() {
+    return {
+      message: "",
+      hotelList: [],
+    };
+  },
+  watch: {
+    message() {
+      axios.get("/hotel/mustTry?city=nanjing" ).then((res) => {
+  
+          this.hotelList = res.data.data;
+      
+      });
+    },
+  },
+};
+</script>
 <style scoped>
-.search_body {
-  flex: 1;
-  overflow: auto;
-}
 .search_body .search_input {
   padding: 8px 10px;
   background-color: #f5f5f5;
