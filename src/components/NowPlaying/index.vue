@@ -6,7 +6,7 @@
       </div>
     </myswiper>
     <ul>
-      <li v-for="dada in data_list" :key="dada.id"> 
+      <li v-for="dada in data_list" :key="dada.id" @click="gou">
         <div class="pic_show">
           <img :src="dada.listImg" />
         </div>
@@ -19,7 +19,7 @@
           <p>{{dada.listTitle}}</p>
           <p>{{dada.desc}}</p>
         </div>
-        <div class="btn_mall">预定</div>
+        <div class="btn_mall">抢购</div>
       </li>
     </ul>
   </div>
@@ -27,6 +27,7 @@
 <script>
 import myswiper from "@/components/Swiper";
 import axios from "axios";
+import { Indicator,Toast } from "mint-ui";
 export default {
   name: "NowPlaying",
   data() {
@@ -36,10 +37,22 @@ export default {
   },
   components: { myswiper },
   mounted() {
+    Indicator.open({
+      text: "加载中...",
+      spinnerType: "fading-circle",
+    });
     axios.get("/hotel/mustTry?city=nanjing").then((res) => {
       this.data_list = res.data.data;
+      Indicator.close();
     });
   },
+    methods: {
+    gou() {
+      Toast({
+        message: "抢购成功",
+        iconClass: "iconfont icon-check",
+      });
+    },}
 };
 </script>
 <style scoped>
@@ -111,6 +124,7 @@ export default {
   align-items: center;
   border-bottom: 1px #e6e6e6 solid;
   padding-bottom: 10px;
+  cursor: pointer;
 }
 .movie_body .pic_show {
   width: 64px;
@@ -153,8 +167,7 @@ export default {
   right: 10px;
   top: 5px;
 }
-.movie_body .btn_mall,
-.movie_body .btn_pre {
+.movie_body .btn_mall {
   width: 47px;
   height: 27px;
   line-height: 28px;

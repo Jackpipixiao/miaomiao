@@ -12,36 +12,31 @@
           <li>南京</li>
         </ul>
       </div>
-      <div class="city_sort">
-        <div v-for="item in city_list" :key="item">
-          <h2>{{item.title}}</h2>
-          <ul>
-            <li v-for="ltem in city_list" :key="ltem">{{ltem.lists}}</li>
-          </ul>
-        </div>
-        <div></div>
-      </div>
-      <div class="city_index">
-        <ul>
-          <li>A</li>
-        </ul>
-      </div>
+      <mt-index-list>
+        <mt-index-section index="A">
+          <mt-cell title="Aaron"></mt-cell>
+          <mt-cell title="Alden"></mt-cell>
+          <mt-cell title="Austin"></mt-cell>
+        </mt-index-section>
+        <mt-index-section index="B">
+          <mt-cell title="Baldwin"></mt-cell>
+          <mt-cell title="Braden"></mt-cell>
+        </mt-index-section>...
+        <mt-index-section index="Z">
+          <mt-cell title="Zack"></mt-cell>
+          <mt-cell title="Zane"></mt-cell>
+        </mt-index-section>
+      </mt-index-list>
     </div>
   </div>
 </template>
 <script>
-import axios from "axios";
 export default {
   name: "City",
   data() {
     return {
       city_list: [],
     };
-  },
-  mounted() {
-    axios.get("../../../public/json/city.json").then((res) => {
-      this.city_list = res.city;
-    });
   },
 };
 </script>

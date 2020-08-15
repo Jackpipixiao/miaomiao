@@ -1,7 +1,7 @@
 <template>
   <div class="movie_body">
     <ul>
-      <li v-for="item in com_list" :key="item.id">
+      <li v-for="item in com_list" :key="item.id" @click="buy">
         <div class="pic_show">
           <img :src="item.img" />
         </div>
@@ -13,24 +13,39 @@
           <p>{{item.listTitle}}</p>
           <p>{{item.desc}}</p>
         </div>
-        <div class="btn_pre">预售</div>
+        <div class="btn_pre">预订</div>
       </li>
     </ul>
   </div>
 </template>
 <script>
 import axios from "axios";
+import { Indicator, Toast } from "mint-ui";
+
 export default {
   name: "ComingSon",
-  data(){
+  data() {
     return {
-      com_list:[]
-    }
+      com_list: [],
+    };
   },
   mounted() {
+    Indicator.open({
+      text: "加载中...",
+      spinnerType: "fading-circle",
+    });
     axios.get("/hotel/mustTry?city=nanjing").then((res) => {
       this.com_list = res.data.data;
+      Indicator.close();
     });
+  },
+  methods: {
+    buy() {
+      Toast({
+        message: "预定成功",
+        iconClass: "iconfont icon-check",
+      });
+    },
   },
 };
 </script>

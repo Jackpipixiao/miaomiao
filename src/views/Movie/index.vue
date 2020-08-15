@@ -2,7 +2,7 @@
   <div>
     <headerBar title="喵喵电影"></headerBar>
     <div id="content">
-      <div class="movie_menu">
+      <div class="movie_menu" :class="isFixed?'fiexd':''">
         <router-link tag="div" to="/movie/city" class="city_name" active-class="active">
           <span>大连</span>
           <i class="iconfont icon-down"></i>
@@ -30,9 +30,39 @@ export default {
     headerBar,
     tabbar,
   },
+  data(){
+    return{
+      isFixed:false
+    }
+  },
+  mounted(){
+    window.onscroll=this.handleScroll
+  },
+  beforeDestroy(){
+    window.onscroll=null
+  },
+  methods:{
+    handleScroll(){
+      if(document.documentElement.scrollTop>='200'){
+        this.isFixed=true
+      }else{
+        this.isFixed=false
+      }
+    }
+  }
 };
 </script>
 <style scoped>
+.fiexd{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 100%;
+  font-weight: 700;
+  background-color: #eee;
+  z-index: 99;
+}
 #content .movie_menu {
   display: flex;
   justify-content: space-around;
