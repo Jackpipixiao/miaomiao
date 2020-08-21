@@ -9,7 +9,7 @@
     <div class="search_result">
       <h3>电影/电视剧/综艺</h3>
       <ul>
-        <li v-for="stem in hotelList" :key="stem">
+        <li v-for="stem in searchData" :key="stem">
           <div class="img">
             <img :src="stem.img" />
           </div>
@@ -37,13 +37,27 @@ export default {
       hotelList: [],
     };
   },
-  watch: {
-    message() {
-      axios.get("/hotel/mustTry?city=nanjing" ).then((res) => {
-  
-          this.hotelList = res.data.data;
-      
-      });
+  mounted() {
+    axios.get("/hotel/mustTry?city=nanjing").then((res) => {
+      this.hotelList = res.data.data;
+    });
+  },
+  computed: {
+    //计算搜索匹配
+    searchData: function () {
+      var search_val = this.message;
+      if (search_val) {
+        return this.hotelList.filter(function (list_data) {
+          //Object.keys判断对象、数组、字符串，依次返回索引、属性值
+          return Object.keys(list_data).some(function (key) {
+            return (
+              String(list_data[key]).toLowerCase().indexOf(search_val) > -1
+            );
+          });
+        });
+      } else {
+        return this.hotelList;
+      }
     },
   },
 };
