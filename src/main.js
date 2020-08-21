@@ -4,8 +4,7 @@ import router from './router'
 import store from './store'
 import iconfont from '../public/iconfont/iconfont.css'
 
-import Loading from '@/components/Loading'
-Vue.component('Loading',Loading)
+import './mock/index'
 // 引入mintui全部组件
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'

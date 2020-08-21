@@ -4,7 +4,7 @@
     <div id="content">
       <div class="movie_menu" :class="isFixed?'fiexd':''">
         <router-link tag="div" to="/movie/city" class="city_name" active-class="active">
-          <span>大连</span>
+          <span>南京</span>
           <i class="iconfont icon-down"></i>
         </router-link>
         <router-link tag="div" to="/movie/nowplaying" class="hot_now" active-class="active">正在热映</router-link>

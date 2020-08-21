@@ -13,30 +13,50 @@
         </ul>
       </div>
       <mt-index-list>
-        <mt-index-section index="A">
-          <mt-cell title="Aaron"></mt-cell>
-          <mt-cell title="Alden"></mt-cell>
-          <mt-cell title="Austin"></mt-cell>
-        </mt-index-section>
-        <mt-index-section index="B">
-          <mt-cell title="Baldwin"></mt-cell>
-          <mt-cell title="Braden"></mt-cell>
-        </mt-index-section>...
-        <mt-index-section index="Z">
-          <mt-cell title="Zack"></mt-cell>
-          <mt-cell title="Zane"></mt-cell>
+        <mt-index-section v-for="item in city_list" :key="item.title" :index="item.title">
+          <mt-cell v-for="i in item.lists" :key="i" :title="i"></mt-cell>
         </mt-index-section>
       </mt-index-list>
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
+import { Indicator } from "mint-ui";
 export default {
   name: "City",
   data() {
     return {
       city_list: [],
     };
+  },
+  mounted() {
+    Indicator.open({
+      text: "加载中...",
+      spinnerType: "fading-circle",
+    });
+    //把后台数据存储到本地，避免每次刷新向后台发出请求
+    //mounted生命周期加载时存储到本地
+    var storage = localStorage.getItem("city_list");
+    if (storage) {
+      this.city_list = JSON.parse(this.city_list);
+      console.log(this.city_list);
+    } else {
+      //拿到mock引入的本地json，实现indexlist功能
+      axios.get("/city.php").then((res) => {
+        Indicator.close();
+        var status = res.statusText;
+        if (status == "OK") {
+          console.log(res);
+          this.city_list = res.data.city;
+          // ajax拿到后台数据将json字符串数据存到city_list中,因为拿数据时只能接受字符串
+          window.localStorage.setItem(
+            "city_list ",
+            JSON.stringify(this.city_list)
+          );
+        }
+      });
+    }
   },
 };
 </script>

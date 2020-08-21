@@ -3,7 +3,7 @@
     <div class="search_input">
       <div class="search_input_wrapper">
         <i class="iconfont icon-sousuo"></i>
-        <input type="text" v-model="message" />
+        <input type="text" placeholder="搜索您想要的信息" v-model="message" />
       </div>
     </div>
     <div class="search_result">

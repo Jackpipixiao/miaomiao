@@ -1,5 +1,5 @@
 <template>
-  <div class="movie_body">
+  <div class="movie_body" ref="movie_body">
     <myswiper :key="data_list.length">
       <div class="swiper-slide" v-for="list in data_list" :key="list.id">
         <img :src="list.img" />
@@ -27,12 +27,14 @@
 <script>
 import myswiper from "@/components/Swiper";
 import axios from "axios";
-import { Indicator,Toast } from "mint-ui";
+import { Indicator, Toast } from "mint-ui";
+
 export default {
   name: "NowPlaying",
   data() {
     return {
       data_list: [],
+      pulldown: true,
     };
   },
   components: { myswiper },
@@ -41,18 +43,29 @@ export default {
       text: "加载中...",
       spinnerType: "fading-circle",
     });
-    axios.get("/hotel/mustTry?city=nanjing").then((res) => {
-      this.data_list = res.data.data;
-      Indicator.close();
-    });
+    var stor = window.localStorage.getItem("data_list");
+    if (stor) {
+      this.data_list = JSON.parse(this.data_list);
+    } else {
+      axios.get("/hotel/mustTry?city=nanjing").then((res) => {
+        this.data_list = res.data.data;
+        window.localStorage.setItem(
+          "data_list",
+          JSON.stringify(this.data_list)
+        );
+        //加载完成后加载功能关闭
+        Indicator.close();
+      });
+    }
   },
-    methods: {
+  methods: {
     gou() {
       Toast({
         message: "抢购成功",
         iconClass: "iconfont icon-check",
       });
-    },}
+    },
+  },
 };
 </script>
 <style scoped>
@@ -113,6 +126,7 @@ export default {
 .movie_body {
   flex: 1;
   overflow: auto;
+  height: 900px;
 }
 .movie_body ul {
   margin: 0 12px;

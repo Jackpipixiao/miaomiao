@@ -1,21 +1,21 @@
 <template>
   <div class="movie_body">
-    <ul>
-      <li v-for="item in com_list" :key="item.id" @click="buy">
-        <div class="pic_show">
-          <img :src="item.img" />
-        </div>
-        <div class="info_list">
-          <h2>{{item.shortName}}</h2>
-          <p>
-            <span class="person">{{item.grassCount}}</span> 人想看
-          </p>
-          <p>{{item.listTitle}}</p>
-          <p>{{item.desc}}</p>
-        </div>
-        <div class="btn_pre">预订</div>
-      </li>
-    </ul>
+      <ul>
+        <li v-for="item in com_list" :key="item.id" @click="buy">
+          <div class="pic_show">
+            <img :src="item.img" />
+          </div>
+          <div class="info_list">
+            <h2>{{item.shortName}}</h2>
+            <p>
+              <span class="person">{{item.grassCount}}</span> 人想看
+            </p>
+            <p>{{item.listTitle}}</p>
+            <p>{{item.desc}}</p>
+          </div>
+          <div class="btn_pre">预订</div>
+        </li>
+      </ul>
   </div>
 </template>
 <script>
@@ -46,6 +46,18 @@ export default {
         iconClass: "iconfont icon-check",
       });
     },
+    loadMore() {
+      console.log("moddre");
+      setTimeout(() => {
+        this.$refs.scroll.finishPullUp();
+      }, 2000);
+    },
+    contentScroll(option) {
+      console.log(option);
+    },
+    toTop() {
+      this.$refs.scroll.scrollTo(0, 0, 300);
+    },
   },
 };
 </script>
@@ -53,6 +65,7 @@ export default {
 .movie_body {
   flex: 1;
   overflow: auto;
+  height: 900px;
 }
 .movie_body ul {
   margin: 0 12px;
